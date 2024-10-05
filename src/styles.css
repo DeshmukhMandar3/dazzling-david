@@ -1,4 +1,53 @@
-.App {
-  font-family: sans-serif;
+.app {
+  font-family: 'Courier New', Courier, monospace;
+  color:black;
   text-align: center;
 }
+
+/* Game css */
+.game{
+  height:100dvh;
+  width:100dvw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-title{
+  font-family:system-ui;
+  font-weight: bold;
+  font-size:35px;
+}
+
+.game-grid{
+  margin-top: 40px;
+  position:relative;
+}
+
+.game-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-box{
+  width:80px;
+  height:80px;
+  border:solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-winner-top-strike{
+  width:90%;
+  position:absolute;
+  left:50%;
+  transform: translateX(-50%);
+}
+
+/* .roddie{
+  left:-72.5px;
+  top:47%;
+  transform:rotate(90deg);
+} */
