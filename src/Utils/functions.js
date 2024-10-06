@@ -1,50 +1,41 @@
 import { WinnerStrikePosition } from "./enums";
 
 export const checkWinner = (checkValue, Grid) => {
-  let isWinner = true;
+  let isWinner = false;
+  let position = null;
 
   for (let i = 0; i < 3; i++) {
-    if (Grid[0][i] !== checkValue) {
-      isWinner = false;
-      break;
+    let count = 0;
+    for (let j = 0; j < 3; j++) {
+      if (Grid[i][j] === checkValue) {
+        count++;
+      }
     }
-  }
-
-  if (isWinner) {
-    return { isWinner: true, type: WinnerStrikePosition.RowTop };
-  }
-  isWinner = true;
-
-  for (let i = 0; i < 3; i++) {
-    if (Grid[i][0] !== checkValue) {
-      isWinner = false;
+    position = `Row_${i}`;
+    if (count === 3) {
+      isWinner = true;
       break;
     }
   }
   if (isWinner) {
-    return { isWinner: true, type: WinnerStrikePosition.ColumnLeft };
+    return { isWinner: true, type: WinnerStrikePosition[position] };
   }
-  isWinner = true;
 
   for (let i = 0; i < 3; i++) {
-    if (Grid[i][2] !== checkValue) {
-      isWinner = false;
+    let count = 0;
+    for (let j = 0; j < 3; j++) {
+      if (Grid[j][i] === checkValue) {
+        count++;
+      }
+    }
+    position = `Column_${i}`;
+    if (count === 3) {
+      isWinner = true;
       break;
     }
   }
   if (isWinner) {
-    return { isWinner: true, type: WinnerStrikePosition.ColumnRight };
-  }
-  isWinner = true;
-
-  for (let i = 0; i < 3; i++) {
-    if (Grid[2][i] !== checkValue) {
-      isWinner = false;
-      break;
-    }
-  }
-  if (isWinner) {
-    return { isWinner: true, type: WinnerStrikePosition.RowBottom };
+    return { isWinner: true, type: WinnerStrikePosition[position] };
   }
   isWinner = true;
 
@@ -58,9 +49,8 @@ export const checkWinner = (checkValue, Grid) => {
     x++;
     y++;
   }
-
   if (isWinner) {
-    return true;
+    return { isWinner: true, type: WinnerStrikePosition.DiagonalLeft };
   }
   isWinner = true;
 
@@ -74,7 +64,9 @@ export const checkWinner = (checkValue, Grid) => {
     x++;
     y--;
   }
-
+  if (isWinner) {
+    return { isWinner: true, type: WinnerStrikePosition.DiagonalRight };
+  }
   return isWinner;
 };
 
@@ -84,4 +76,17 @@ export const togglePlayer = (player, setPlayer) => {
   } else {
     setPlayer(0);
   }
+};
+
+export const checkGameTied = (grid) => {
+  let isTied = true;
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (grid[i][j] === 0) {
+        isTied = false;
+        break;
+      }
+    }
+  }
+  return isTied;
 };

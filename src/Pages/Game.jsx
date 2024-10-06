@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { checkWinner, togglePlayer } from "../Utils/functions";
+import { checkGameTied, checkWinner, togglePlayer } from "../Utils/functions";
 import { PlayerName, PlayerValue, WinnerStrikeClassname } from "../Utils/enums";
 
 const Game = () => {
   const [player, setPlayer] = useState(0);
   const [winner, setWinner] = useState(null);
+  const [isTied, setIsTied] = useState(false);
   const [winnerStrike, setWinnerStrike] = useState(null);
   const [grid, setGrid] = useState([
     [0, 0, 0],
@@ -28,8 +29,12 @@ const Game = () => {
     if (checkedValue?.isWinner) {
       setWinner(PlayerName[player]);
       setWinnerStrike(checkedValue?.type);
+      return;
     }
-
+    if (checkGameTied(grid)) {
+      setIsTied(true);
+      return;
+    }
     togglePlayer(player, setPlayer);
   };
 
@@ -37,7 +42,28 @@ const Game = () => {
     <div className="game">
       <div>
         <div className="game-title">Tic Tac Toe</div>
-        {winner && <div>{winner} is the winner</div>}
+
+        <div className="game-players">
+          <div
+            className={player === 0 ? "game-selected-player" : "game-player"}
+          >
+            Player 1
+          </div>
+          <div
+            className={player === 1 ? "game-selected-player" : "game-player"}
+          >
+            Player 2
+          </div>
+        </div>
+
+        {winner ? (
+          <div>{winner} is the winner</div>
+        ) : isTied ? (
+          <div>Match Tied!</div>
+        ) : (
+          <div style={{ height: "12px" }}></div>
+        )}
+
         <div className="game-grid">
           {grid.map((element, rowIndex) => {
             return (
@@ -55,6 +81,7 @@ const Game = () => {
               </div>
             );
           })}
+
           {winner && <hr className={WinnerStrikeClassname[winnerStrike]} />}
         </div>
       </div>

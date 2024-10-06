@@ -9,15 +9,23 @@ export const PlayerName = Object.freeze({
 });
 
 export const WinnerStrikePosition = Object.freeze({
-  RowTop: "RowTop",
-  RowBottom: "RowBottom",
-  ColumnLeft: "ColumnLeft",
-  ColumnRight: "ColumnRight",
+  Row_0: "RowTop",
+  Row_1: "RowMiddle",
+  Row_2: "RowBottom",
+  Column_0: "ColumnLeft",
+  Column_1: "ColumnMiddle",
+  Column_2: "ColumnRight",
+  DiagonalLeft: "DiagonalLeft",
+  DiagonalRight: "DiagonalRight",
 });
 
 export const WinnerStrikeClassname = Object.freeze({
   RowTop: "game-winner-top-strike",
+  RowMiddle: "game-winner-row-middle-strike",
   RowBottom: "game-winner-bottom-strike",
   ColumnLeft: "game-winner-left-strike",
+  ColumnMiddle: "game-winner-column-middle-strike",
   ColumnRight: "game-winner-right-strike",
+  DiagonalLeft: "game-winner-diagonal-left-strike",
+  DiagonalRight: "game-winner-diagonal-right-strike",
 });
