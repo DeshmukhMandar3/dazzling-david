@@ -1,4 +1,134 @@
-.App {
-  font-family: sans-serif;
+.app {
+  font-family: 'Courier New', Courier, monospace;
+  color:black;
   text-align: center;
+}
+
+/* Game css */
+.game{
+  height:100dvh;
+  width:100dvw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-title{
+  font-family:system-ui;
+  font-weight: bold;
+  font-size:35px;
+}
+
+.game-grid{
+  margin-top: 40px;
+  position:relative;
+}
+
+.game-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-box{
+  width:80px;
+  height:80px;
+  border:solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:32px;
+}
+
+.game-winner-top-strike{
+  border:solid green;
+  width:90%;
+  position:absolute;
+  left:50%;
+  transform: translateX(-50%);
+  top:32.5px;
+}
+
+.game-winner-row-middle-strike{
+  border:solid green;
+  width:90%;
+  position:absolute;
+  left:50%;
+  transform: translateX(-50%);
+  top:45.5%;
+}
+
+.game-winner-bottom-strike{
+  border:solid green;
+  width:90%;
+  position:absolute;
+  left:50%;
+  transform:translate(-50%);
+  bottom:32.5px;
+}
+
+.game-winner-left-strike{
+  border:solid green;
+  width:90%;
+  position:absolute;
+  transform:rotate(90deg);
+  left:-72px;
+  top:47%;
+}
+
+.game-winner-column-middle-strike{
+  border:solid green;
+  width:90%;
+  position:absolute;
+  transform:rotate(90deg);
+  left:12px;
+  top:47%;
+}
+
+.game-winner-right-strike{
+  border:solid green;
+  width:90%;
+  position:absolute;
+  transform:rotate(90deg);
+  right:-71.5px;
+  top:47%;
+}
+
+.game-winner-diagonal-left-strike{
+  border:solid green;
+  width:110%;
+  position:absolute;
+  top:46%;
+  left:50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.game-winner-diagonal-right-strike{
+  border:solid green;
+  width:110%;
+  position:absolute;
+  top:46%;
+  left:50%;
+  transform: translateX(-50%) rotate(135deg);
+}
+
+.game-players{
+  display:flex;
+  justify-content: space-between;
+  margin-top:25px;
+  margin-bottom:25px;
+}
+
+.game-player{
+  border:solid black;
+  padding:15px;
+  font-weight: bold;
+  border-bottom:solid black 5px;
+}
+
+.game-selected-player{
+  border:solid black;
+  padding:15px;
+  font-weight: bold;
+  border-bottom:solid green 5px;
 }
