@@ -15,11 +15,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position:relative
+}
+
+.utils{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content: flex-end;
+  padding:15px 30px;
 }
 
 .game-title{
   font-family:system-ui;
   font-weight: bold;
+  font-style: italic;
   font-size:35px;
 }
 
@@ -32,16 +44,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width:fit-content;
+  margin:auto;
+}
+
+.game-row-border{
+  border-top: solid white 5px;
+  border-bottom:solid white 5px;
 }
 
 .game-box{
-  width:80px;
-  height:80px;
-  border:solid black;
+  width:100px;
+  height:100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size:32px;
+  font-size:42px;
+  font-weight: bold;
+}
+
+.game-column-border{
+  border-left:solid white 5px;
+  border-right: solid white 5px;;
 }
 
 .game-winner-top-strike{
@@ -50,8 +74,8 @@
   position:absolute;
   left:50%;
   transform: translateX(-50%);
-  top:32.5px;
-}
+  top:36px;
+} 
 
 .game-winner-row-middle-strike{
   border:solid green;
@@ -68,33 +92,33 @@
   position:absolute;
   left:50%;
   transform:translate(-50%);
-  bottom:32.5px;
+  bottom:45px;
 }
 
 .game-winner-left-strike{
   border:solid green;
-  width:90%;
+  width:80%;
   position:absolute;
   transform:rotate(90deg);
-  left:-72px;
+  left:-64px;
   top:47%;
 }
 
 .game-winner-column-middle-strike{
   border:solid green;
-  width:90%;
+  width:80%;
   position:absolute;
   transform:rotate(90deg);
-  left:12px;
+  left:42px;
   top:47%;
 }
 
 .game-winner-right-strike{
   border:solid green;
-  width:90%;
+  width:80%;
   position:absolute;
   transform:rotate(90deg);
-  right:-71.5px;
+  right:-62.5px;
   top:47%;
 }
 
@@ -119,22 +143,32 @@
 .game-players{
   display:flex;
   justify-content: space-between;
+  gap:105px;
   margin-top:25px;
   margin-bottom:25px;
 }
 
 .game-player{
-  border:solid black;
-  padding:15px;
+  border:solid white;
+  font-size:25px;
+  padding:15px 20px;
   font-weight: bold;
-  border-bottom:solid black 5px;
+  border-radius: 5px;
 }
 
 .game-selected-player{
-  border:solid black;
-  padding:15px;
+  border:solid white;
+  font-size:25px;
+  padding:15px 20px;
   font-weight: bold;
-  border-bottom:solid green 5px;
+  border-bottom:solid white 5px;
+  border-radius: 5px;
+}
+
+.game-result{
+  font-size: 30px;
+  font-weight: bold;
+  margin-top:25px;
 }
 
 /* Welcome page css */
@@ -214,4 +248,8 @@
   margin-top:55px;
   background:#fff;
   color:rgb(83, 161, 83)
+}
+
+.game-refresh{
+  padding:10px;
 }

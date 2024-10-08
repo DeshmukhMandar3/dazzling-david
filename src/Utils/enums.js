@@ -3,11 +3,6 @@ export const PlayerValue = Object.freeze({
   1: "X",
 });
 
-export const PlayerName = Object.freeze({
-  0: "Player 1",
-  1: "Player 2",
-});
-
 export const WinnerStrikePosition = Object.freeze({
   Row_0: "RowTop",
   Row_1: "RowMiddle",
