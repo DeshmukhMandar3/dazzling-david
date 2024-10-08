@@ -1,10 +1,10 @@
-import Game from "./Pages/Game.jsx";
+import AllRoutes from "./AllRoutes.jsx";
 import "./styles.css";
 
 export default function App() {
   return (
     <div className="app">
-      <Game />
+      <AllRoutes />
     </div>
   );
 }
