@@ -7,8 +7,8 @@ const Button = ({ text, onButtonClick, customClassname = "" }) => {
   return (
     <div
       onClick={() => {
-        onButtonClick();
         play();
+        onButtonClick();
       }}
       className={`button ${customClassname}`}
     >

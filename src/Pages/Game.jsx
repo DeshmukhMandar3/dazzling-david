@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import { checkGameTied, checkWinner, togglePlayer } from "../Utils/functions";
 import { PlayerValue, WinnerStrikeClassname } from "../Utils/enums";
 import { IoIosRefresh } from "react-icons/io";
+import { IoArrowBackOutline } from "react-icons/io5";
 import Button from "../Components/Button";
 import useSound from "use-sound";
-import tap from "../Sounds/tap.mp3";
 import mouseClickOne from "../Sounds/mouseClickOne.mp3";
 import mouseClickTwo from "../Sounds/mouseClickTwo.mp3";
 import winnerMusic from "../Sounds/winnerMusic.mp3";
+import matchTied from "../Sounds/matchTied.mp3";
+import notAllowed from "../Sounds/notAllowed.mp3";
+import { useNavigate } from "react-router";
 
 const Game = () => {
-  const [player, setPlayer] = useState(0);
+  const navigate = useNavigate();
+  const [selectedPlayer, setSelectedPlayer] = useState(0);
   const [player1, setPlayer1] = useState("");
   const [player2, setPlayer2] = useState("");
   const [winner, setWinner] = useState(null);
@@ -23,34 +27,57 @@ const Game = () => {
   ]);
 
   const [play] = useSound(winnerMusic);
-  const [playerUser1] = useSound(mouseClickOne);
-  const [playerUser2] = useSound(mouseClickTwo);
+  const [playUser1] = useSound(mouseClickOne);
+  const [playUser2] = useSound(mouseClickTwo);
+  const [playMatchTied] = useSound(matchTied);
+  const [playNotAllowed] = useSound(notAllowed);
 
   const handleGameUpdate = (row, column) => {
-    let updateValue = PlayerValue[player];
-    let temp = grid;
-    if (temp[row][column] !== 0 || winner) {
-      return;
-    }
-    temp[row][column] = updateValue;
-    setGrid(temp);
+    setGrid((previousGrid) => {
+      if (previousGrid[row][column] !== 0 || winner) {
+        playNotAllowed();
+        return previousGrid;
+      }
 
-    let PlayerName = {
-      0: player1 ? player1 : "Player 1",
-      1: player2 ? player2 : "Player 2",
-    };
+      if (!winner && !isTied) {
+        if (selectedPlayer === 0) {
+          playUser1();
+        } else {
+          playUser2();
+        }
+      }
 
-    let checkedValue = checkWinner(updateValue, grid);
-    if (checkedValue?.isWinner) {
-      setWinner(PlayerName[player]);
-      setWinnerStrike(checkedValue?.type);
-      return;
-    }
-    if (checkGameTied(grid)) {
-      setIsTied(true);
-      return;
-    }
-    togglePlayer(player, setPlayer);
+      const updatedGrid = previousGrid.map((r, rowIndex) => {
+        return r.map((cell, columnIndex) => {
+          return row === rowIndex && column === columnIndex
+            ? PlayerValue[selectedPlayer]
+            : cell;
+        });
+      });
+
+      let checkedValue = checkWinner(PlayerValue[selectedPlayer], updatedGrid);
+
+      let PlayerName = {
+        0: player1 ? player1 : "Player 1",
+        1: player2 ? player2 : "Player 2",
+      };
+
+      if (checkedValue?.isWinner) {
+        play();
+        setWinner(PlayerName[selectedPlayer]);
+        setWinnerStrike(checkedValue?.type);
+        return updatedGrid;
+      }
+
+      if (checkGameTied(updatedGrid)) {
+        playMatchTied();
+        setIsTied(true);
+        return updatedGrid;
+      }
+
+      togglePlayer(selectedPlayer, setSelectedPlayer);
+      return updatedGrid;
+    });
   };
 
   const refreshGrid = () => {
@@ -62,6 +89,7 @@ const Game = () => {
     setGrid(initialGrid);
     setWinner(null);
     setWinnerStrike(null);
+    setIsTied(false);
     setPlayer(0);
   };
 
@@ -70,15 +98,14 @@ const Game = () => {
     setPlayer2(localStorage.getItem("Player_2"));
   }, []);
 
-  useEffect(() => {
-    if (winner) {
-      play();
-    }
-  }, [winner]);
-
   return (
     <div className="game">
       <div className="utils">
+        <Button
+          text={<IoArrowBackOutline />}
+          onButtonClick={() => navigate("/")}
+          customClassname="game-refresh"
+        />
         <Button
           text={<IoIosRefresh />}
           onButtonClick={refreshGrid}
@@ -88,16 +115,19 @@ const Game = () => {
 
       <div>
         <div className="game-title">Tic Tac Toe</div>
-
-        {!winner && (
+        {!winner && !isTied && (
           <div className="game-players">
             <div
-              className={player === 0 ? "game-selected-player" : "game-player"}
+              className={
+                selectedPlayer === 0 ? "game-selected-player" : "game-player"
+              }
             >
               {player1 ? player1 : "Player 1"}
             </div>
             <div
-              className={player === 1 ? "game-selected-player" : "game-player"}
+              className={
+                selectedPlayer === 1 ? "game-selected-player" : "game-player"
+              }
             >
               {player2 ? player2 : "Player 2"}
             </div>
@@ -119,6 +149,7 @@ const Game = () => {
                 className={`game-row ${
                   rowIndex === 1 ? "game-row-border" : ""
                 }`}
+                key={rowIndex}
               >
                 {element.map((item, columnIndex) => {
                   return (
@@ -128,10 +159,8 @@ const Game = () => {
                       }`}
                       onClick={() => {
                         handleGameUpdate(rowIndex, columnIndex);
-                        {
-                          player === 0 ? playerUser1() : playerUser2();
-                        }
                       }}
+                      key={columnIndex}
                     >
                       {item == "0" ? "" : item}
                     </div>
@@ -140,7 +169,6 @@ const Game = () => {
               </div>
             );
           })}
-
           {winner && <div className={WinnerStrikeClassname[winnerStrike]} />}
         </div>
       </div>

@@ -2,10 +2,9 @@
   font-family: 'Courier New', Courier, monospace;
   color:black;
   text-align: center;
-  width:100dvw;
-  height:100dvh;
   background:rgb(83, 161, 83);
-  color:#fff
+  color:#fff;
+  padding: 0px 15px;
 }
 
 /* Game css */
@@ -15,7 +14,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position:relative
+  position:relative;
 }
 
 .utils{
@@ -24,8 +23,8 @@
   left:0;
   right:0;
   display:flex;
-  justify-content: flex-end;
-  padding:15px 30px;
+  justify-content: space-between;
+  padding:15px 10px;
 }
 
 .game-title{
@@ -71,7 +70,8 @@
 }
 
 .game-winner-top-strike{
-  border:solid green;
+  border:solid #fff;
+  background:#fff;
   width:90%;
   position:absolute;
   left:50%;
@@ -80,7 +80,8 @@
 } 
 
 .game-winner-row-middle-strike{
-  border:solid green;
+  border:solid #fff;
+  background:#fff;
   width:90%;
   position:absolute;
   left:50%;
@@ -89,7 +90,8 @@
 }
 
 .game-winner-bottom-strike{
-  border:solid green;
+  border:solid #fff;
+  background:#fff;
   width:90%;
   position:absolute;
   left:50%;
@@ -98,7 +100,8 @@
 }
 
 .game-winner-left-strike{
-  border:solid green;
+  border:solid #fff;
+  background:#fff;
   position:absolute;
   width:0px;
   top:50%;
@@ -108,7 +111,8 @@
 }
 
 .game-winner-column-middle-strike{
-  border:solid green;
+  border:solid #fff;
+  background:#fff;
   position:absolute;
   width:0px;
   top:50%;
@@ -118,7 +122,8 @@
 }
 
 .game-winner-right-strike{
-  border:solid green;
+  border:solid #fff;
+  background:#fff;
   position:absolute;
   width:0px;
   top:50%;
@@ -128,7 +133,8 @@
 }
 
 .game-winner-diagonal-left-strike{
-  border:solid green;
+  border:solid #fff;
+  background:#fff;
   width:110%;
   position:absolute;
   top:50%;
@@ -137,7 +143,8 @@
 }
 
 .game-winner-diagonal-right-strike{
-  border:solid green;
+  border:solid #fff;
+  background:#fff;
   width:110%;
   position:absolute;
   top:50%;
@@ -257,4 +264,32 @@
 
 .game-refresh{
   padding:10px;
+}
+
+@media (max-width:450px){
+  .welcome-buttons-container{
+    flex-direction: column;
+    gap:15px;
+  }
+  .welcome-buttons-container > div{
+    width:80%
+  }
+  .welcome-play-button{
+    min-width: 240px;
+  }
+  .game-players{
+    gap:10px;
+  }
+  .game-player{
+    max-width: 100px;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    overflow: hidden;
+  }
+  .game-selected-player{
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap
+  }
 }
