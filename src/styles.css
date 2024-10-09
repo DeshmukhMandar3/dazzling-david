@@ -36,8 +36,10 @@
 }
 
 .game-grid{
+  margin:auto;
   margin-top: 40px;
   position:relative;
+  width:fit-content;
 }
 
 .game-row{
@@ -74,7 +76,7 @@
   position:absolute;
   left:50%;
   transform: translateX(-50%);
-  top:36px;
+  top:45px;
 } 
 
 .game-winner-row-middle-strike{
@@ -83,7 +85,7 @@
   position:absolute;
   left:50%;
   transform: translateX(-50%);
-  top:45.5%;
+  top:150px;
 }
 
 .game-winner-bottom-strike{
@@ -92,41 +94,44 @@
   position:absolute;
   left:50%;
   transform:translate(-50%);
-  bottom:45px;
+  bottom:50px;
 }
 
 .game-winner-left-strike{
   border:solid green;
-  width:80%;
   position:absolute;
-  transform:rotate(90deg);
-  left:-64px;
-  top:47%;
+  width:0px;
+  top:50%;
+  transform: translateY(-50%);
+  height: 90%;
+  left:48px;
 }
 
 .game-winner-column-middle-strike{
   border:solid green;
-  width:80%;
   position:absolute;
-  transform:rotate(90deg);
-  left:42px;
-  top:47%;
+  width:0px;
+  top:50%;
+  transform: translateY(-50%);
+  height: 90%;
+  left:153px;
 }
 
 .game-winner-right-strike{
   border:solid green;
-  width:80%;
   position:absolute;
-  transform:rotate(90deg);
-  right:-62.5px;
-  top:47%;
+  width:0px;
+  top:50%;
+  transform: translateY(-50%);
+  height: 90%;
+  right:50px;
 }
 
 .game-winner-diagonal-left-strike{
   border:solid green;
   width:110%;
   position:absolute;
-  top:46%;
+  top:50%;
   left:50%;
   transform: translateX(-50%) rotate(45deg);
 }
@@ -135,7 +140,7 @@
   border:solid green;
   width:110%;
   position:absolute;
-  top:46%;
+  top:50%;
   left:50%;
   transform: translateX(-50%) rotate(135deg);
 }

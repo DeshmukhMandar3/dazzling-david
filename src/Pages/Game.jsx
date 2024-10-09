@@ -141,7 +141,7 @@ const Game = () => {
             );
           })}
 
-          {winner && <hr className={WinnerStrikeClassname[winnerStrike]} />}
+          {winner && <div className={WinnerStrikeClassname[winnerStrike]} />}
         </div>
       </div>
     </div>
